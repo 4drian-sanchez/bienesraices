@@ -1,0 +1,1 @@
+csurf y cookie-parser son dependencias para la proteccion contra CSRF

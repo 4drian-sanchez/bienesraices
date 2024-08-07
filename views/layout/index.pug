@@ -8,5 +8,7 @@ html(lang="es")
         title Bienes raices | #{pagina}
         link(rel="stylesheet", href="/css/app.css")
     body.min-h-screen.bg-gray-50
+        if barra 
+            include header
         main(class="mx-auto container px-2 mt-10")
             block contenido 

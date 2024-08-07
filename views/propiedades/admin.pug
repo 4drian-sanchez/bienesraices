@@ -1,0 +1,10 @@
+extends ../layout/index
+
+block contenido
+    h1(class="text-center text-4xl font-black text-slate-800")= pagina
+
+    div(class="max-w-screen-xl my-10 mx-auto")
+        a(
+            href="/propiedad/crear"
+            class="inline-block bg-indigo-500 md:hover:bg-indigo-700 text-white px-5 py-5 uppercase font-bold rounded-lg transition-colors w-full sm:w-auto text-center"
+        ) Crear propiedad

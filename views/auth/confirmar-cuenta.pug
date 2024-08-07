@@ -1,0 +1,8 @@
+extends ../layout/index
+
+block contenido
+    div.text-center
+        h1(class=" text-4xl font-black text-slate-800")= pagina
+        p(class= error ? 'bg-red-500' : 'bg-green-500').max-w-md.mx-auto.text-white.py-8.mt-5.font-bold.px-4.rounded.md= mensaje
+        if !error
+            a.underline-offset-4.text-center.text-gray-600(href="/auth/login") Inicia sesion 
