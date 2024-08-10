@@ -1,0 +1,33 @@
+extends ../layout/admin
+
+block styles
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css")
+    meta( name="csrf-token" content= csrfToken)
+
+block contenido
+    h1(class="text-center text-4xl font-normal text-slate-800")=pagina 
+        span.font-bold.block #{propiedad.titulo}
+
+    div(class="max-w-xl bg-white px-3 py-5 my-10 mx-auto")
+
+        form(
+            class="dropzone border-dashed border-2 w-full min:h96 h-auto rounded flex-col justify-center items-center"
+            id="imagen"
+            method="POST"
+            action=`/propiedades/agregar-imagen/${propiedad.id}`
+            enctype="multipart/form-data"
+        )
+
+            input(
+                type="hidden"
+                name="_csrf"
+                value= csrfToken
+            )
+
+        button(
+            type="button"
+            class="bg-indigo-500 hover:bg-indigo-700 transiion-colors px-5 py-2 text-white uppercase rounded-md w-full mt-5 md:cursor-pointer"
+            id="publicar"
+        ) Publicar propiedad
+block scrypts
+    script(src="/js/dropzone.js") 
