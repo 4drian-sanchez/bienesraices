@@ -2,25 +2,57 @@ import { unlink } from 'node:fs/promises'
 import { validationResult } from 'express-validator'
 import {Categoria, Precio, Propiedad} from '../models/index.js'
 
+
 const admin = async (req, res) => {
 
-    const {id} = req.usuario
+    //Comprobar que exista el queryString
+    const {pagina: paginaActual} = req.query
 
-    const propiedades = await Propiedad.findAll({
-        where: {
-            usuarioId: id
-        },
-        include: [
-            {model: Categoria, as: 'categoria'},
-            {model: Precio, as: 'precio'}
-        ]
-    })
+    const limit = 2
+    const offset = ((paginaActual * limit) - limit)
+    
+    const expresion = /^[1-9]$/
+    if( !expresion.test(paginaActual) ) {
+        return res.redirect('/mis-propiedades?pagina=1')
+    }
+    
+    try {
+        const {id} = req.usuario
 
-    res.render('propiedades/admin', {
-        pagina: 'Mis propiedades',
-        csrfToken: req.csrfToken(),
-        propiedades
-    })
+        const [propiedades, total] = await Promise.all([
+            Propiedad.findAll({
+                limit,
+                offset,
+                where: {
+                    usuarioId: id
+                },
+                include: [
+                    {model: Categoria, as: 'categoria'},
+                    {model: Precio, as: 'precio'}
+                ]
+            }),
+            Propiedad.count({
+                where: {
+                    usuarioId: id
+                }
+            })
+        ])
+
+        //VISTA ↓
+        res.render('propiedades/admin', {
+            pagina: 'Mis propiedades',
+            csrfToken: req.csrfToken(),
+            propiedades,
+            paginas: Math.ceil(total / limit),
+            paginaActual: Number(paginaActual),
+            limit,
+            offset,
+            total
+        })        
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 const crear = async (req, res) => {

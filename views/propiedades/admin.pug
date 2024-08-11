@@ -22,7 +22,7 @@ block contenido
                                 img(
                                     src=`/uploads/${propiedad.imagen}`
                                     alt=`Imagen de ${propiedad.titulo}`
-                                    class="w-full block"
+                                    class="h-36 w-full block rounded-lg"
                                 )
 
                             div(class="sm:w-2/4 md:w-3/6 lg:w-4/6")
@@ -66,5 +66,31 @@ block contenido
                                         value='Eliminar'
                                         class=`bg-red-500 text-white px-5 py-2 text-xl font-bold w-full rounded-md cursor-pointer`
                                     )                                
+            div(class="sm:flex bg-white px-4 py-3 items-center justify-between border-t border-gray-200 sm:px-6")
+                
+                div(class="flex-1 flex justify-between sm:hidden")
+                    a(
+                    href=`/mis-propiedades?pagina=${paginaActual - 1}` 
+                    class=`${paginaActual == 1 ? 'pointer-events-none' : '' } relative inline-flex items-center px-4 py-2 border border-gray-500 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50`
+                    ) Anterior
+
+                    a(
+                    href=`/mis-propiedades?pagina=${paginaActual + 1}` 
+                    class=`${paginaActual == paginas ? 'pointer-events-none' : ''} relative inline-flex items-center px-4 py-2 border border-gray-500 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50`
+                    ) Siguiente
+
+                div(class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between gap-2")
+                    p(class="text-sm text-gray-700") Mostrando 
+                        span(class="font-medium") #{offset + 1}  
+                        span(class="font-medium") y #{total < limit + offset ? total : limit + offset} de  
+                        span(class="font-medium") #{total} resultados  
+
+                div(class="hidden sm:block") 
+                    nav(class="relative z-0 inline-flex gap-x-2 rounded-md shadow-md")
+                        -var n = 1
+                        while n <= paginas
+                            a(href=`/mis-propiedades?pagina=${n}` class=`${paginaActual == n ? 'bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-300 text-gray-500 hover:bg-gray-50'} relative inline-flex items-center px-4 py-2 border text-sm font-bold`) #{n++}
+            
+                            
     else
         p.text-center No hay propiedades

@@ -23,7 +23,7 @@ router.post('/propiedades/crear',
     body('titulo').notEmpty().withMessage('El titulo no puede ir vacio'),
     body('descripcion')
         .notEmpty().withMessage('la descripcion no puede ir vacia')
-        .isLength({max: 200}).withMessage('La descripcion es muy larga'),
+        .isLength({max: 500}).withMessage('La descripcion es muy larga'),
     body('categoria').isNumeric().withMessage('Seleccione una categoría'),
     body('precio').isNumeric().withMessage('Seleccione un precio'),
     body('habitaciones').isNumeric().withMessage('Seleccione el numero de habitaciones'),
@@ -54,7 +54,7 @@ router.post('/propiedades/editar/:id',
     body('titulo').notEmpty().withMessage('El titulo no puede ir vacio'),
     body('descripcion')
         .notEmpty().withMessage('la descripcion no puede ir vacia')
-        .isLength({max: 200}).withMessage('La descripcion es muy larga'),
+        .isLength({max: 500}).withMessage('La descripcion es muy larga'),
     body('categoria').isNumeric().withMessage('Seleccione una categoría'),
     body('precio').isNumeric().withMessage('Seleccione un precio'),
     body('habitaciones').isNumeric().withMessage('Seleccione el numero de habitaciones'),
