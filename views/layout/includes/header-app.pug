@@ -1,9 +1,52 @@
-header(class="bg-indigo-500 py-6")
+header(class="bg-indigo-500 pb-6 lg:pb-0 pt-6")
     div(class="max-w-screen-xl mx-auto flex justify-between items-center")
-        h1.font-bold.text-white.text-4xl Bienes
-            span.font-normal Raices
+        a(href="/") 
+            h1.font-bold.text-white.text-4xl Bienes
+                span.font-normal Raices
         
-        nav(class="hidden md:block") 
-            a.text-white.mr-4(href="/mis-propiedades")  Mis propiedades 
-            a.text-white.mr-4(href="")  Perfil 
-            a(class="bg-indigo-700 px-10 py-2 text-white font-bold uppercase" href="")  iniciar sesion 
+        nav(class="hidden md:block text-center") 
+            a(
+            href="/auth/login"
+            class="bg-indigo-700 hover:bg-indigo-900  text-white px-4 py-2 rounded-md mr-3 uppercase text-sm font-bold"
+            ) Iniciar sesion 
+            a(
+            href="/auth/registro"
+            class="bg-blue-700 hover:bg-blue-900  text-white px-4 py-2 rounded-md mr-3 uppercase text-sm font-bold"
+            ) Crear cuenta 
+
+    div(class="bg-indigo-700 py-5 hidden lg:block mt-5")
+        div(class="max-w-screen-lg mx-auto flex justify-between items-center")
+            nav(class="flex gap-2") 
+                a(href="/categorias/1" class="text-sm font-bold uppercase text-white") Casas
+                a(href="/categorias/2" class="text-sm font-bold uppercase text-white") Departamentos
+                a(href="/categorias/3" class="text-sm font-bold uppercase text-white") Bodegas
+                a(href="/categorias/4" class="text-sm font-bold uppercase text-white") Terrenos
+                a(href="/categorias/5" class="text-sm font-bold uppercase text-white") Cabañas
+            form(
+                method="POST"
+                action="/buscador"
+                class="flex gap-3 items-center"
+            )
+                input(
+                    type="hidden"
+                    name="_csrf"
+                    value= csrfToken
+                )
+                label(
+                    for="termino"
+                    class="text-sm uppercase font-bold text-white "
+                ) Búqueda
+                input(
+                    type="text"
+                    placeholder="Buscar propiedades"
+                    id="termino"
+                    name="termino"
+                    class="p-2 rounded-lg shadow text-sm"
+                )
+                input(
+                    type="submit"
+                    value="Buscar"
+                    class="bg-indigo-800 hover:bg-indigo-400 rounded-lg text-white uppercase font-bold p-2 cursor-pointer text-sm"
+                    )
+
+            

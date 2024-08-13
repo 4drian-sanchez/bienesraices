@@ -5,6 +5,7 @@ export default {
     entry: {
         mapa: './src/js/mapa.js',
         mostrarMapa: './src/js/mostrarMapa.js',
+        mapaInicio: './src/js/mapaInicio.js',
         dropzone: './src/js/dropzone.js',
     },
     output: {

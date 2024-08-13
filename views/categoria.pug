@@ -1,0 +1,11 @@
+extends layout/app
+
+block contenido
+    section(class="py-5 px-2 max-w-screen-xl mx-auto")
+        h2(class="text-center text-4xl font-extrabold pt-10 mb-14")= pagina
+            if propiedades.length
+                div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5")
+                    each propiedad in propiedades
+                        include ./templates/card
+            else
+                p.text-gray-500.text-sm.mt-5 No hay propiedades disponibles en esta categoría

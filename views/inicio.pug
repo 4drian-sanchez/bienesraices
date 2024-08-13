@@ -1,0 +1,52 @@
+extends layout/app
+block styles
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+block contenido
+    div(class="max-w-screen-lg mx-auto py-10")
+        h1.text-center.font-bold.text-4xl.mb-5 Ubicación en el mapa
+
+        div(class="flex flex-col md:flex-row items-center py-10 gap-4")
+            h2(class="text-sm uppercase text-gray-800 font-bold") Filtrar propiedades: 
+
+            div(class="w-full md:mx-auto flex items-center gap-2")
+                label(for="categoria" class="text-sm w-24 uppercase text-gray-500 font-bold") Categorías 
+                select(
+                    id="categorias"
+                    class="flex-1 bg-white w-full px-3 py-2 border border-gray-300 rounded-md shadow"
+                )
+                    option(value="" selected disabled) -- Seleccione --
+                    each categoria in categorias
+                        option(value=categoria.id)= categoria.nombre
+
+            div(class="w-full md:mx-auto flex items-center gap-2")
+                label(for="categoria" class="text-sm w-24 uppercase text-gray-500 font-bold") Precios 
+                select(
+                    id="precios"
+                    class="flex-1 bg-white w-full px-3 py-2 border border-gray-300 rounded-md shadow"
+                )
+                    option(value="" selected disabled) -- Seleccione --
+                    each precio in precios
+                        option(value=precio.id)= precio.nombre
+
+        div(
+            id="mapa-inicio"
+            class="h-[600px] rounded-md shadow-lg"
+        )
+
+        section(class="py-5 px-2")
+            h2(class="text-center text-4xl font-extrabold pt-10 mb-14") Casas en venta 
+            div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5")
+                each propiedad in casas
+                    include templates/card
+
+        section(class="py-5 px-2")
+            h2(class="text-center text-4xl font-extrabold pt-10 mb-14") Departamentos en venta 
+            div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5")
+                each propiedad in departamentos
+                    include templates/card
+block scrypts
+    script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
+    script(src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js")
+    script(src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/2.7.0/bundle.min.js")
+    script(src="/js/mapaInicio.js")
