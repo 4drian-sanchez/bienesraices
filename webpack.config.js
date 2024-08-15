@@ -7,6 +7,7 @@ export default {
         mostrarMapa: './src/js/mostrarMapa.js',
         mapaInicio: './src/js/mapaInicio.js',
         dropzone: './src/js/dropzone.js',
+        estadoPropiedad: './src/js/estadoPropiedad.js',
     },
     output: {
         filename: '[name].js',

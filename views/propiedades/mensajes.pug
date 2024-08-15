@@ -1,0 +1,28 @@
+extends ../layout/admin
+
+block contenido
+    //-pre= JSON.stringify(mensajes, undefined, 2)
+    h1(class="text-center text-4xl font-black text-slate-800 my-5")= pagina
+    a(
+    href="/mis-propiedades"
+    class="inline-block bg-indigo-500 md:hover:bg-indigo-700 text-white px-5 py-5 uppercase font-bold rounded-lg transition-colors w-full sm:w-auto text-center"
+    ) Volver
+    
+    main(class="max-w-4xl bg-white shadow-lg py-5 px-2 rounded-md mx-auto my-10")
+        if mensajes.length
+            ul
+            each mensaje in mensajes
+                li(class="p-2 border-b-2 list-none")
+                    p(class="mb-1 font-bold text-gray-700 block") Nombre: 
+                        span(class="font-normal text-gray-500 pl-3")= mensaje.usuario.nombre
+                    p(class="mb-1 font-bold text-gray-700 block") Email: 
+                        span(class="font-normal text-gray-500 pl-3")= mensaje.usuario.email
+                    p(class="mb-1 font-bold text-gray-700 block") Mensaje: 
+                        span(class="font-normal text-gray-500 pl-3")= mensaje.mensaje
+                    p(class="mb-1 font-bold text-gray-700 block") Enviado: 
+                        span(class="font-normal text-gray-500 pl-3")= dateFormatter(mensaje.createdAt)
+
+
+                    
+        else 
+            p(class="text-center text-gray-600 texl-lg my-10") No tienes mensajes

@@ -38,8 +38,8 @@ app.set('views', './views');
 app.use( express.static('public'))
 
 //routing
-app.use('/auth', usuarioRoutes)
 app.use('/', appRoutes)
+app.use('/auth', usuarioRoutes)
 app.use('/', propiedadesRoutes)
 app.use('/api', apiRoutes)
 

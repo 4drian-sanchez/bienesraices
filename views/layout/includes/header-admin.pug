@@ -4,7 +4,21 @@ header(class="bg-indigo-500 py-6")
             h1.font-bold.text-white.text-4xl Bienes
                 span.font-normal Raices
         
-        nav(class="hidden md:block") 
+        nav(class="hidden md:flex md:gap-2 items-center") 
             a.text-white.mr-4(href="/mis-propiedades")  Mis propiedades 
             a.text-white.mr-4(href="")  Perfil 
-            a(class="bg-indigo-700 px-10 py-2 text-white font-bold uppercase" href="")  cerrar sesion 
+
+            form(
+                method="post"
+                action="/auth/cerrar-sesion"
+            )
+                input(
+                    type="hidden"
+                    value= csrfToken
+                    name="_csrf"
+                )
+                input(
+                class="bg-indigo-700 px-10 py-2 text-white font-bold uppercase"
+                type="submit"
+                value="cerrar sesion"
+                )  

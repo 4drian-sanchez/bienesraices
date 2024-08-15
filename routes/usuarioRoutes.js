@@ -8,7 +8,8 @@ import {
     confirmar, 
     resetPassword,
     comprobarToken,
-    nuevoPassword
+    nuevoPassword,
+    cerrarSesion
  } from "../controllers/usuarioController.js"
 
 const router = express.Router()
@@ -21,6 +22,9 @@ router.post('/registro', registro)
 
 //URL dinámica
 router.get('/confirmar/:token', confirmar)
+
+//Cerrarsesion
+router.post('/cerrar-sesion', cerrarSesion)
 
 router.get('/olvide-password', formularioOlvidePassword)
 //Comprueba el token

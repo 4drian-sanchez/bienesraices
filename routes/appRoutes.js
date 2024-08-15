@@ -17,7 +17,9 @@ router.get('/categorias/:id', categoria)
 //404
 router.get('/404', noEncontrado)
 
+//buscador
 router.post('/buscador', buscador)
+
 export default router
 
 

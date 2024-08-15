@@ -98,8 +98,8 @@ const buscador = async (req, res) => {
         propiedades,
         csrfToken: req.csrfToken()
     })
-    
 }
+
 
 export {
     inicio,

@@ -1,5 +1,8 @@
 extends ../layout/admin
 
+block styles
+    meta(name="CSRF-token", content= csrfToken)
+
 block contenido
     h1(class="text-center text-4xl font-black text-slate-800")= pagina
 
@@ -36,19 +39,22 @@ block contenido
                                         svg.size-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
                                             path(stroke-linecap='round' stroke-linejoin='round' d='M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z')
                                         span.text-black.font-bold= propiedad.precio.nombre
+                                    a(
+                                        href=`/mensajes/${propiedad.id}`
+                                        class="block text-gray-500 font-bold underline text-base mt-2 leading-8 lg:text-xs"
+                                    )= `${propiedad.mensajes.length == 1 ? propiedad.mensajes.length + ' mensaje'   : propiedad.mensajes.length + ' mensajes'}`
 
-                            div(class="sm:w-1/4 md:w-2/6 lg:flex-1 space-y-3 md:space-y-0 md:flex md:gap-2")
-                                form(
-                                    action=""
-                                )
-                                    input(
-                                        type="submit"
-                                        value=`${propiedad.publicado ? 'Publicado' : 'No publicado'}`
-                                        class=`${propiedad.publicado ? 'bg-green-500' : 'bg-yellow-500'} text-white px-5 py-2 text-xl font-bold w-full rounded-md cursor-pointer`
-                                    )
+                            div(class="sm:w-1/4 md:w-2/6 items-center space-y-3 md:space-y-0 md:flex md:gap-2")
+
+                                button(
+                                    class=`${propiedad.publicado ? 'bg-green-500' : 'bg-yellow-500'} text-white px-5 py-2 text-xl font-bold w-full rounded-md cursor-pointer lg:text-xs cambiarEstado`
+                                    data-propiedad-id= propiedad.id
+                                    
+                                )= `${propiedad.publicado ? 'Publicado' : 'No publicado'}`
+
                                 a(
                                     href=`/propiedades/editar/${propiedad.id}`
-                                    class=`bg-blue-500 text-white px-5 py-2 text-xl font-bold w-full block text-center rounded-md cursor-pointer`
+                                    class=`bg-blue-500 text-white px-5 py-2 text-xl font-bold w-full block text-center rounded-md cursor-pointer lg:text-xs`
                                 ) Editar
 
                                 form(
@@ -64,8 +70,9 @@ block contenido
                                     input(
                                         type="submit"
                                         value='Eliminar'
-                                        class=`bg-red-500 text-white px-5 py-2 text-xl font-bold w-full rounded-md cursor-pointer`
-                                    )                                
+                                        class=`bg-red-500 text-white px-5 py-2 text-xl font-bold w-full rounded-md cursor-pointer lg:text-xs`
+                                    )  
+
             div(class="sm:flex bg-white px-4 py-3 items-center justify-between border-t border-gray-200 sm:px-6")
                 
                 div(class="flex-1 flex justify-between sm:hidden")
@@ -89,8 +96,13 @@ block contenido
                     nav(class="relative z-0 inline-flex gap-x-2 rounded-md shadow-md")
                         -var n = 1
                         while n <= paginas
-                            a(href=`/mis-propiedades?pagina=${n}` class=`${paginaActual == n ? 'bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-300 text-gray-500 hover:bg-gray-50'} relative inline-flex items-center px-4 py-2 border text-sm font-bold`) #{n++}
+                            a(
+                                href=`/mis-propiedades?pagina=${n}` 
+                                class=`${paginaActual == n ? 'bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-300 text-gray-500 hover:bg-gray-50'} relative inline-flex items-center px-4 py-2 border text-sm font-bold`) #{n++}
             
                             
     else
         p.text-center No hay propiedades
+    
+block scrypts
+    script(src="/js/estadoPropiedad.js")  
